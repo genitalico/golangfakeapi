@@ -14,8 +14,9 @@ type SettingHandler struct {
 }
 
 func (sh *SettingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
-	methods := sh.config[r.URL.Path]
+	urlRequest := r.URL.String()
+	fmt.Println(urlRequest)
+	methods := sh.config[urlRequest]
 
 	if len(methods) == 0 {
 		responseBodyNotFound, err := json.Marshal(sh.notFound)
